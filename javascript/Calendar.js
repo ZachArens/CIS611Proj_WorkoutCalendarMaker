@@ -9,6 +9,8 @@ const getCalArray = (startDate, workoutSchArr) = {
     for (workout of workoutSchArr) {
         console.log(workout);
     };
+
+    //some changes - test git
 };
 
 const dateFromString = (inputDate) => {
