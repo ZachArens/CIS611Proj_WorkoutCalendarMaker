@@ -2,7 +2,7 @@ const Workout = require('../javascript/Workout');
 
 let textToWorkoutSchedule = (workoutPlanText) => {
     let workoutSchedule;
-    splitText = workoutPlanText.split('\n');
+    let splitText = workoutPlanText.split('\n');
 
     let removeBlanks = (item) => {
         return item !== "" || item.match(/[^\n\r]/);
