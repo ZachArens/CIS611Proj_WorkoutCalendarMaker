@@ -11,6 +11,7 @@ let textToWorkoutSchedule = (workoutPlanText) => {
     let filteredText = splitText.filter(removeBlanks);
 
     let weekNum = 0;
+    let workoutNum = 0;
     let createWorkout = (item, index) => {
         let workout;
         let indexColon = item.indexOf(':') + 1;
@@ -22,14 +23,16 @@ let textToWorkoutSchedule = (workoutPlanText) => {
         } else {
             title = item.trim();
             description = '';
-
         }
 
         if (item.match(/week/i)) {
             weekNum ++;
             return "";
+        } else if (item === " ") { //replace with regex to filter out any blank or incorrectly formatted lines
+            return "";
         } else {
-            workout = new Workout(index, weekNum, title, description);
+            workoutNum ++;
+            workout = new Workout(workoutNum, weekNum, title, description);
         }
         return workout;
     };

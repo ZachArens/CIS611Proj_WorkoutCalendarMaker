@@ -1,4 +1,5 @@
 const getDateDaysFrom = require('../javascript/Date');
+const Workout = require('../javascript/Workout');
 
 const getStartDate = (numDays, raceDate) => {
     return getDateDaysFrom(numDays, dateFromString(raceDate));
@@ -13,6 +14,7 @@ const getCalArray = (startDate, workoutSchArr) => {
 
     for (i=0; i<workoutSchArr.length; i++) {
         //if (i=0) {lastWeekNum = workoutSchArr[i].weekNum;}
+        workoutSchArr[i]
         currentWeek = workoutSchArr[i].weekNum;
 
         if (currentWeek !== lastWeekNum) {
@@ -27,24 +29,31 @@ const getCalArray = (startDate, workoutSchArr) => {
         }
 
         if (!sun) {
-            workoutCalArr.append(workoutSchArr.addDate(getDateDaysFrom((currentWeek-1)*7+1, startDate)));
+            workoutSchArr[i].addDate(getDateDaysFrom((currentWeek-1)*7, dateFromString(startDate)));
+            sun = true;
         } else if (!mon) {
-            workoutCalArr.append(workoutSchArr.addDate(getDateDaysFrom((currentWeek-1)*7+2, startDate)));
+            workoutSchArr[i].addDate(getDateDaysFrom((currentWeek-1)*7+1, dateFromString(startDate)));
+            mon = true;
         } else if (!tue) {
-            workoutCalArr.append(workoutSchArr.addDate(getDateDaysFrom((currentWeek-1)*7+3, startDate)));
+            workoutSchArr[i].addDate(getDateDaysFrom((currentWeek-1)*7+2, dateFromString(startDate)));
+            tue = true;
         } else if (!wed) {
-            workoutCalArr.append(workoutSchArr.addDate(getDateDaysFrom((currentWeek-1)*7+4, startDate)));
+            workoutSchArr[i].addDate(getDateDaysFrom((currentWeek-1)*7+3, dateFromString(startDate)));
+            wed = true;
         } else if (!thu) {
-            workoutCalArr.append(workoutSchArr.addDate(getDateDaysFrom((currentWeek-1)*7+5, startDate)));
+            workoutSchArr[i].addDate(getDateDaysFrom((currentWeek-1)*7+4, dateFromString(startDate)));
+            thu = true;
         } else if (!fri) {
-            workoutCalArr.append(workoutSchArr.addDate(getDateDaysFrom((currentWeek-1)*7+6, startDate)));
+            workoutSchArr[i].addDate(getDateDaysFrom((currentWeek-1)*7+5 dateFromString(startDate)));
+            fri = true;
         } else if (!sat) {
-            workoutCalArr.append(workoutSchArr.addDate(getDateDaysFrom((currentWeek-1)*7+7, startDate)));
+            workoutSchArr[i].addDate(getDateDaysFrom((currentWeek-1)*7+6, dateFromString(startDate)));
+            sat = true;
         }
             lastWeekNum = currentWeek;
     }
 
-    return workoutCalArr;
+    return workoutSchArr;
 
 };
 
@@ -57,5 +66,5 @@ const dateFromString = (inputDate) => {
 
     return new Date(y, m-1, d, 0, 0, 0, 0);
 };
-
-module.exports = getStartDate, getCalArray;
+module.exports = getStartDate;
+module.exports = getCalArray;
