@@ -1,6 +1,6 @@
 const Workout = require('../javascript/Workout');
 
-let textToWorkoutSchedule = (workoutPlanText) => {
+export let textToWorkoutSchedule = (workoutPlanText) => {
     let workoutSchedule;
     let splitText = workoutPlanText.split('\n');
 
@@ -12,7 +12,7 @@ let textToWorkoutSchedule = (workoutPlanText) => {
 
     let weekNum = 0;
     let workoutNum = 0;
-    let createWorkout = (item, index) => {
+    let createWorkout = (item) => {
         let workout;
         let indexColon = item.indexOf(':') + 1;
         let title;
@@ -45,4 +45,7 @@ let textToWorkoutSchedule = (workoutPlanText) => {
     return workoutSchedule;
 };
 
-module.exports = textToWorkoutSchedule;
+//module.exports = textToWorkoutSchedule;
+
+//export function textToWorkoutSchedule();
+

@@ -5,23 +5,32 @@
     <title>Workout Calender Maker</title>
 </head>
 <body>
-    <div id="data-window">
-        <textarea id="pasteText" placeholder="Paste text here..."></textarea>
-        <input id="uploadText" type="file">
-        <button id="checkText" type="button">Check Text</button>
-    </div>
-    <div>
-        <label for="calcDate">Start Date</label>
-        <input id="calcDate" type="date">
-        <div>
-            <label for="start">Start Date</label>
-            <input type="radio" name="StartOrRace" id="start">
-            <label for="race">Race Date</label>
-            <input type="radio" name="StartOrRace" id="race">
-            <button type="submit">Submit</button>
+    <form id="CalendarMakerForm">
+        <div id="data-window">
+            <div id="inputDataDiv">
+                <label for="pasteText">Paste your data here</label>
+                <textarea id="pasteText" placeholder="Paste text here..."></textarea>
+                <input id="uploadText" type="file" accept=".text/plain,.text/richtext">
+                <button id="checkText" type="button">Check Text</button>
+            </div>
         </div>
-    </div>
+        <div id="calcForm">
+            <label for="calcDate">Start Date</label>
+            <input id="calcDate" type="date">
+            <div>
+                <label for="start">Start Date</label>
+                <input type="radio" name="StartOrRace" id="start">
+                <label for="race">Race Date</label>
+                <input type="radio" name="StartOrRace" id="race">
+                <button type="button" id="CMsubmit">Calculate</button>
+            </div>
+        </div>
+        <div id="calendarOptions" hidden>
+            <button id="reset"></button>
+        </div>
+    </form>
+
 </body>
-<script src="javascript/index.js">
+<script src="./javascript/index.js">
 </script>
 </html>

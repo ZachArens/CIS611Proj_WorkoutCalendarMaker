@@ -1,15 +1,17 @@
-const textToWorkoutSchedule = require('../javascript/CalendarMaker');
+//const textToWorkoutSchedule = require('../javascript/CalendarMaker');
+import {textToWorkoutSchedule} from '../javascript/CalendarMaker';
+
 const Workout = require('../javascript/Workout');
 
 test('creates an array of workouts from an index and a string formatted title: description', () => {
-    equivalentArr = [new Workout(1, 1, 'SWIM:',
+    let equivalentArr = [new Workout(1, 1, 'SWIM:',
         '600yds 4 x 50yds, 4 x 100yds'), new Workout(2, 1, 'BIKE:',
         '45 minutes'), new Workout(3, 1, 'RUN:',
         '15 minutes'), new Workout(4, 2, 'SWIM:',
         '700yds 6 x 50yds, 4 x 100yds'), new Workout(5, 2, 'BIKE:',
         '45 minutes'), new Workout(6, 2, 'RUN:',
         '20 minutes'), ];
-    testString = '\n' +
+    let testString = '\n' +
         'WEEK 1\n' +
         '\n' +
         'SWIM: 600yds 4 x 50yds, 4 x 100yds\n' +
@@ -33,7 +35,7 @@ test('creates an array of workouts from an index and a string formatted title: d
 });
 
 test('creates a different array of workouts', () => {
-    equivalentArr = [new Workout(1, 1, 'Day 1:',
+    let equivalentArr = [new Workout(1, 1, 'Day 1:',
         'Run easy for 1 mile (1.6 K)'), new Workout(2, 1, 'Day 2:',
         'Rest'), new Workout(3, 1, 'Day 3:',
         'Run easy for 1 mile (1.6 K)'), new Workout(4, 1, 'Day 4:',
@@ -48,7 +50,7 @@ test('creates a different array of workouts', () => {
         'Rest'), new Workout(13, 2, 'Day 6:',
         'Run easy for 1.5 miles (2.4 K)'), new Workout(14, 2, 'Day 7:',
         'Rest or 30-minute walk'), ];
-    testString = 'Week 1\n' +
+    let testString = 'Week 1\n' +
         'Day 1: Run easy for 1 mile (1.6 K)\n' +
         'Day 2: Rest\n' +
         'Day 3: Run easy for 1 mile (1.6 K)\n' +

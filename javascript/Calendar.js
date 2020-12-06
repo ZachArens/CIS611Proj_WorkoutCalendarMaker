@@ -9,7 +9,6 @@ const getCalArray = (startDate, workoutSchArr) => {
     let i;
     let sun, mon, tue, wed, thu, fri, sat;
     let currentWeek;
-    let workoutCalArr = [];
     let lastWeekNum = 0;
 
     for (i=0; i<workoutSchArr.length; i++) {
@@ -44,7 +43,7 @@ const getCalArray = (startDate, workoutSchArr) => {
             workoutSchArr[i].addDate(getDateDaysFrom((currentWeek-1)*7+4, dateFromString(startDate)));
             thu = true;
         } else if (!fri) {
-            workoutSchArr[i].addDate(getDateDaysFrom((currentWeek-1)*7+5 dateFromString(startDate)));
+            workoutSchArr[i].addDate(getDateDaysFrom((currentWeek-1)*7+5, dateFromString(startDate)));
             fri = true;
         } else if (!sat) {
             workoutSchArr[i].addDate(getDateDaysFrom((currentWeek-1)*7+6, dateFromString(startDate)));

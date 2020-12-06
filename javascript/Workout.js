@@ -19,3 +19,4 @@ let Workout = class {
 }
 
 module.exports = Workout;
+
