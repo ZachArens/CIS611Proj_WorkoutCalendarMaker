@@ -1,11 +1,11 @@
 let Workout = class {
     constructor(workoutNumber, weekNum = Math.ceil(workoutNumber/7),
-                title = 'Rest Day', description = '') {
+                title = 'Rest Day', description = '', workoutDate = null) {
         this.workoutNum = workoutNumber;
         this.weekNum = weekNum;
         this.title = title;
         this.description = description;
-        this.workoutDate = null;
+        this.workoutDate = workoutDate;
     }
 
     addDate(inputDate) {

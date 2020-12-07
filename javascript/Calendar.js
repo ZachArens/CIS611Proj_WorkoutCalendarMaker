@@ -13,7 +13,7 @@ const getCalArray = (startDate, workoutSchArr) => {
 
     for (i=0; i<workoutSchArr.length; i++) {
         //if (i=0) {lastWeekNum = workoutSchArr[i].weekNum;}
-        workoutSchArr[i]
+        //workoutSchArr[i]
         currentWeek = workoutSchArr[i].weekNum;
 
         if (currentWeek !== lastWeekNum) {
@@ -65,5 +65,4 @@ const dateFromString = (inputDate) => {
 
     return new Date(y, m-1, d, 0, 0, 0, 0);
 };
-module.exports = getStartDate;
-module.exports = getCalArray;
+module.exports = {getStartDate: getStartDate, getCalArray: getCalArray};
