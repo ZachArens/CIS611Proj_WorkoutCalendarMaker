@@ -1,4 +1,4 @@
-const getDateDaysFrom = require('../javascript/Date');
+const getDateDaysFrom = require('./MyDate');
 const Workout = require('../javascript/Workout');
 
 const getStartDate = (numDays, raceDate) => {

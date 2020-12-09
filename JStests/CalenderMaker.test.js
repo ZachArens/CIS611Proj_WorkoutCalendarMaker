@@ -100,8 +100,8 @@ test('createCalDay returns a div with a date Number, workout number, title, and 
 const createCalWeek = CalendarMaker.createCalWeek;
 
 test('createWeekDay returns several divs with a date Number, workout number, title, and description', () => {
-    let startDate = new Date(2020, 8, 1);
-    let testArray3 = getCalArray('09-01-2020', testArray1);
+    let startDate = new Date(2020, 7, 30);
+    let testArray3 = getCalArray('08-30-2020', testArray1);
 
     let returnedHTML = '<div class=\"day\">'+
             '<h2>Sep 1</h2>' +
@@ -180,7 +180,6 @@ test('createWeekDay returns several divs with a date Number, workout number, tit
 
 
     let testFunction = createCalWeek(startDate, testArray3);
-
 
     expect(testFunction.innerHTML).toEqual(returnedHTML);
 });

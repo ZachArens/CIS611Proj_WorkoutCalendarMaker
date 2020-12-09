@@ -1,4 +1,5 @@
 const Workout = require('../javascript/Workout');
+const getDateDaysFrom = require('../javascript/MyDate');
 
 const textToWorkoutSchedule = (workoutPlanText) => {
     let workoutSchedule;
@@ -42,7 +43,7 @@ const textToWorkoutSchedule = (workoutPlanText) => {
     //remove additional lines from entries from week indicator
     workoutSchedule = workoutSchedule.filter(removeBlanks);
 
-    return workoutSchedule;
+    return JSON.stringify(workoutSchedule);
 };
 
 const createCalDay = (workoutNum, title, description) => {
@@ -66,11 +67,14 @@ const createCalDay = (workoutNum, title, description) => {
 }
 
 const createCalWeek = (firstDate, arrayOfWorkouts) => {
+
     const calWeek = document.createElement("div");
     calWeek.setAttribute("class", 'week');
     const daysOfWeek = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-
-    //create an empty div set with div for each day of the week
+    if (firstDate.getDay() !== 0) {
+        throw 'firstDate of week must be a Sunday'
+    }
+        //create an empty div set with div for each day of the week
     for (let day in daysOfWeek) {
         const dayDiv = document.createElement("div");
         dayDiv.setAttribute("class", 'day');
@@ -82,7 +86,8 @@ const createCalWeek = (firstDate, arrayOfWorkouts) => {
 
     let i;
     for (i=0; i < days.length; i++) {
-        const dateNum = firstDate.getDate() + i;
+        const dateOfDay = getDateDaysFrom(i, firstDate);
+        const dateNum = dateOfDay.getDate();
         const monthsList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
             'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
