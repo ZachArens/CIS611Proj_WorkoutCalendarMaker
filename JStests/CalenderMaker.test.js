@@ -81,6 +81,12 @@ test('creates a different array of workouts', () => {
     expect(tTWS(testString)).toEqual(testArray2);
 });
 
+const pWS = CalendarMaker.printWorkoutSchedule;
+
+test('output string of printWorkoutSchedule should be formatted correctly', () => {
+    console.log(pWS(testArray1));
+});
+
 const createCalDay = CalendarMaker.createCalDay;
 
 test('createCalDay returns a div with a date Number, workout number, title, and description', () => {

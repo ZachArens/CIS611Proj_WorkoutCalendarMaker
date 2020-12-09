@@ -1,23 +1,24 @@
 //TODO - investigate jest testing js as front end & importing front end JS.
 //TODO = need tests for index.js
-const CalendarMaker = require('./CalendarMaker.js');
-const textToWorkoutSchedule = CalendarMaker.textToWorkoutSchedule;
-const createCalendar = CalendarMaker.createCalendar;
+
 const Workout = require('./Workout.js');
+const {printWorkoutSchedule, createCalendar, textToWorkoutSchedule} = require("./CalendarMaker");
 
 
 const pasteBox = document.getElementById("pasteText");
 const viewWindow = document.getElementById('data-window');
-let workoutArray = [];
+
 const processText = (text) => {
     // TODO pastedData.sanitize();
-    workoutArray = textToWorkoutSchedule(text);
+    alert('processing text');
+    let workoutArray = textToWorkoutSchedule(text);
     //TODO - check for correct formatting for tests to ensure that the return string is processable again
-    return JSON.stringify(workoutArray);
+    return printWorkoutSchedule(workoutArray);
 }
 
 const checkData = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
+    alert('checking data');
     let pastedData;
     if (pasteBox.value) {
         pastedData = pasteBox.value;
@@ -43,7 +44,7 @@ const submitCalOptions = (event) => {
 
     viewWindow.appendChild(createCalendar(workoutArray));
 
-    alert('submit button pushed');
+    alert('submit button pushed2');
 }
 
 const hideReplaceCalculate = (event) => {
@@ -61,7 +62,7 @@ const hideReplaceReset = (event) => {
 
 //TODO - need to fix default for .txt files selectable in file browser
 const uploadButton = document.getElementById('uploadText');
-uploadButton.addEventListener("change", (event) => alert('uploadText')); //uploadData(event));
+uploadButton.addEventListener("change", (event) => alert('Ive edited the upload text alert')); //uploadData(event));
 
 const checkTextButton = document.getElementById("checkText");
 checkTextButton.addEventListener("click", (event) => checkData(event)); //checkData(event));

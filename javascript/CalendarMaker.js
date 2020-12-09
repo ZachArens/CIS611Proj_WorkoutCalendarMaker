@@ -43,7 +43,20 @@ const textToWorkoutSchedule = (workoutPlanText) => {
     //remove additional lines from entries from week indicator
     workoutSchedule = workoutSchedule.filter(removeBlanks);
 
-    return JSON.stringify(workoutSchedule);
+    return workoutSchedule;
+};
+
+let printWorkoutSchedule = (workoutSchedule) => {
+    let outputString = "";
+    let i;
+    for (i=0; i<workoutSchedule.length; i++) {
+        const workout = workoutSchedule[i];
+        const workoutString = `Workout ${workout.workoutNum} - 
+        Week ${workout.weekNum} - ${workout.title} ${workout.description}`;
+        outputString += workoutString + '\n';
+    }
+
+    return outputString;
 };
 
 const createCalDay = (workoutNum, title, description) => {
@@ -144,6 +157,6 @@ const createCalendar = (workoutArray) => {
 }
 
 module.exports = {textToWorkoutSchedule: textToWorkoutSchedule, createCalDay: createCalDay,
-    createCalWeek: createCalWeek, createCalendar: createCalendar};
+    createCalWeek: createCalWeek, createCalendar: createCalendar, printWorkoutSchedule: printWorkoutSchedule};
 
 

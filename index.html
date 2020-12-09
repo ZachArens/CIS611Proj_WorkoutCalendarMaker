@@ -2,28 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Workout Calender Maker</title>
+    <link rel="stylesheet" href="/CSS/index.css">
 </head>
 <body>
-    <form id="CalendarMakerForm">
-        <div id="data-window">
-            <div id="inputDataDiv">
-                <label for="pasteText">Paste your data here</label>
+    <form id="CalendarMakerForm" class="pure-form">
+        <div  id="data-window">
+            <fieldset class="pure-group" id="inputDataDiv">
                 <textarea id="pasteText" placeholder="Paste text here..."></textarea>
+            </fieldset>
+            <fieldset class="pure-group">
+                <p>Or upload your text here</p>
                 <input id="uploadText" type="file" accept=".text/plain,.text/richtext">
-                <button id="checkText" type="button">Check Text</button>
-            </div>
+            </fieldset>
+
+            <button id="checkText" type="button">Check Text</button>
+
         </div>
         <div id="calcForm">
-            <label for="calcDate">Start Date</label>
-            <input id="calcDate" type="date">
-            <div>
-                <label for="start">Start Date</label>
-                <input type="radio" name="StartOrRace" id="start">
-                <label for="race">Race Date</label>
-                <input type="radio" name="StartOrRace" id="race">
+                <label for="start" class="pure-radio-1-3">
+                    <input type="radio" name="StartOrRace" id="start">Start Date
+                </label>
+                <label for="race" class="pure-radio">
+                    <input type="radio" name="StartOrRace" id="race">Race Date
+                </label>
+                <input id="calcDate" placeholder="Enter your date" type="date" class="pure-input-1-3">
                 <button type="button" id="CMsubmit">Calculate</button>
-            </div>
         </div>
         <div id="calendarOptions" hidden>
             <button id="reset"></button>
