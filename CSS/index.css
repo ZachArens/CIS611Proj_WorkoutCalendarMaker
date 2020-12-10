@@ -1,10 +1,52 @@
-/*@import 'pure.css';*/
 
-textarea {
-    width: 100%;
-    height: 500px;
+body {
+    line-height: 1.7em;
+    background-color: darkseagreen;
+    color: #112221;
+    font-family: 'Montserrat', sans-serif;
 }
 
-label {
-    color: white;
+textarea, button, input {
+    border-radius: 3px;
+}
+
+textarea {
+    width: 80%;
+    height: 200px;
+}
+
+input {
+    border: solid 2px #7f8c8d;
+}
+
+/*input {*/
+/*    border: solid 1px black;*/
+/*}*/
+
+.pure-button {
+    background-color: #aaaaaa;
+}
+
+fieldset {
+    border-style: none;
+}
+
+.field-group {
+    border: solid 1px darkslategray;
+}
+
+::-webkit-input-placeholder {
+    font-family: 'Montserrat', sans-serif;
+}
+
+:-ms-input-placeholder {
+    font-family: 'Montserrat', sans-serif;
+}
+
+:-moz-placeholder {
+    font-family: 'Montserrat', sans-serif;
+}
+
+::-moz-placeholder {
+    font-family: 'Montserrat', sans-serif;
 }

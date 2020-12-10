@@ -4,37 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Workout Calender Maker</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;1,100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/CSS/index.css">
 </head>
 <body>
     <form id="CalendarMakerForm" class="pure-form">
-        <div  id="data-window">
+        <div  id="data-window" class="field-group">
             <fieldset class="pure-group" id="inputDataDiv">
                 <textarea id="pasteText" placeholder="Paste text here..."></textarea>
+                <button id="checkPasteText" type="button">Check Text</button>
             </fieldset>
             <fieldset class="pure-group">
                 <p>Or upload your text here</p>
-                <input id="uploadText" type="file" accept=".text/plain,.text/richtext">
+                <input id="uploadText" type="file" >
+                <button id="checkUploadText" type="button">Check Text</button>
             </fieldset>
-
-            <button id="checkText" type="button">Check Text</button>
-
         </div>
-        <div id="calcForm">
+        <fieldset>
+
+        </fieldset>
+
+        <div class="calcForm field-group">
+            <fieldset>
                 <label for="start" class="pure-radio-1-3">
                     <input type="radio" name="StartOrRace" id="start">Start Date
                 </label>
                 <label for="race" class="pure-radio">
                     <input type="radio" name="StartOrRace" id="race">Race Date
                 </label>
+            </fieldset>
+            <fieldset>
                 <input id="calcDate" placeholder="Enter your date" type="date" class="pure-input-1-3">
-                <button type="button" id="CMsubmit">Calculate</button>
+            </fieldset>
         </div>
-        <div id="calendarOptions" hidden>
-            <button id="reset"></button>
-        </div>
-    </form>
+        <fieldset class="calcForm">
+            <button type="button" id="CMsubmit">Calculate</button>
+        </fieldset>
 
+
+    </form>
+    <div id="calendarOptions" hidden>
+        <button id="reset">Reset</button>
+    </div>
 </body>
 <script src="./dist/main.js">
 </script>

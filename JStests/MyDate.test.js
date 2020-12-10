@@ -16,6 +16,15 @@ test('gets a Date 0 from inputDate', () => {
 });
 
 test('test add into new month', () => {
-    expect(getDateDaysFrom(6, new Date(2018, 8, 28)))
-        .toEqual(new Date(2018,9,4));
+    expect(getDateDaysFrom(2, new Date(2020, 7, 30)))
+        .toEqual(new Date(2020,8,1));
 });
+
+test('gDDF should return a new Date instance and not alter the date passed', () => {
+    let date1 = new Date(2020, 7, 30)
+    let date2 = getDateDaysFrom(2, date1);
+    let date3 = getDateDaysFrom(-2, date2);
+
+    expect(date1).toEqual(date3);
+    expect(date1).not.toBe(date3);
+})

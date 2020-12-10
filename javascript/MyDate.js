@@ -1,6 +1,6 @@
 function getDateDaysFrom(numDays, inputDate) {
 
-    let outputDate = inputDate;
+    let outputDate = new Date(inputDate.getTime());
 
     outputDate.setDate(outputDate.getDate() + numDays);
 

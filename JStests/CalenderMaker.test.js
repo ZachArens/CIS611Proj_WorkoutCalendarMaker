@@ -105,87 +105,132 @@ test('createCalDay returns a div with a date Number, workout number, title, and 
 
 const createCalWeek = CalendarMaker.createCalWeek;
 
-test('createWeekDay returns several divs with a date Number, workout number, title, and description', () => {
+test('createCalWeek returns several divs with a date Number, workout number, title, and description', () => {
     let startDate = new Date(2020, 7, 30);
     let testArray3 = getCalArray('08-30-2020', testArray1);
 
-    let returnedHTML = '<div class=\"day\">'+
-            '<h2>Sep 1</h2>' +
-        '</div>' +
-        '<div class=\"day\">'+
-            '<h2>2</h2>' +
-        '</div>' +
-        '<div class=\"day\">'+
-            '<h2>3</h2>' +
+    let returnedHTML = '<div class=\"day sun\">'+
+                '<h2>30</h2>' +
             '<div>' +
             '<h3>#1</h3>' +
             '<h3>SWIM:</h3>' +
             '<p>600yds 4 x 50yds, 4 x 100yds</p>' +
             '</div>' +
         '</div>' +
-        '<div class=\"day\">'+
-            '<h2>4</h2>' +
+        '<div class=\"day mon\">'+
+                '<h2>31</h2>' +
             '<div>' +
             '<h3>#2</h3>' +
             '<h3>BIKE:</h3>' +
             '<p>45 minutes</p>' +
             '</div>' +
         '</div>' +
-        '<div class=\"day\">'+
+        '<div class=\"day tue\">'+
+                '<h2>Aug 1</h2>' +
+            '<div>' +
+            '<h3>#3</h3>' +
+            '<h3>RUN:</h3>' +
+            '<p>15 minutes</p>' +
+            '</div>' +
+        '</div>' +
+        '<div class=\"day wed\">'+
+            '<h2>2</h2>' +
+        '</div>' +
+        '<div class=\"day thu\">'+
+            '<h2>3</h2>' +
+        '</div>' +
+        '<div class=\"day fri\">'+
+            '<h2>4</h2>' +
+        '</div>' +
+        '<div class=\"day sat\">'+
             '<h2>5</h2>' +
-            '<div>' +
-            '<h3>#4</h3>' +
-            '<h3>RUN:</h3>' +
-            '<p>15 minutes/p>' +
-            '</div>' +
-        '</div>' +
-        '<div class=\"day\">'+
-            '<h2>6</h2>' +
-        '</div>' +
-        '<div class=\"day\">'+
-            '<h2>7</h2>' +
-        '</div>' +
-        '<div class=\"day\">'+
-            '<h2>8</h2>' +
-        '</div>' +
-        '<div class=\"day\">'+
-            '<h2>9</h2>' +
-        '</div>' +
-        '<div class=\"day\">'+
-            '<h2>10</h2>' +
-            '<div>' +
-            '<h3>#4</h3>' +
-            '<h3>SWIM:</h3>' +
-            '<p>700yds 6 x 50yds, 4 x 100yds</p>' +
-            '</div>' +
-        '</div>' +
-        '<div class=\"day\">'+
-            '<h2>11</h2>' +
-            '<div>' +
-            '<h3>#5</h3>' +
-            '<h3>BIKE:</h3>' +
-            '<p>45 minutes</p>' +
-            '</div>' +
-        '</div>' +
-        '<div class=\"day\">'+
-            '<h2>12</h2>' +
-            '<div>' +
-            '<h3>#6</h3>' +
-            '<h3>RUN:</h3>' +
-            '<p>20 minutes</p>' +
-            '</div>' +
-        '</div>' +
-        '<div class=\"day\">'+
-            '<h2>13</h2>' +
-        '</div>' +
-        '<div class=\"day\">'+
-            '<h2>14</h2>' +
         '</div>';
 
 
-
-
-    let testFunction = createCalWeek(startDate, testArray3);
-
-    expect(testFunction.innerHTML).toEqual(returnedHTML);
+    expect(createCalWeek(startDate, testArray3[0]).innerHTML).toEqual(returnedHTML);
 });
+
+const createCalendar = CalendarMaker.createCalendar;
+
+test('createCalendar should return 2 weeks of divs ' +
+    'when given an array of 2 weeks of workouts', () => {
+    let testArray3 = getCalArray('08-30-2020', testArray1);
+    let startDate = '08-30-2020'
+    let expectedHTML =
+        '<div>' + '<div>' + '<div class=\"day sun\">'+
+        '<h2>30</h2>' +
+        '<div>' +
+        '<h3>#1</h3>' +
+        '<h3>SWIM:</h3>' +
+        '<p>600yds 4 x 50yds, 4 x 100yds</p>' +
+        '</div>' +
+        '</div>' +
+        '<div class=\"day mon\">'+
+        '<h2>31</h2>' +
+        '<div>' +
+        '<h3>#2</h3>' +
+        '<h3>BIKE:</h3>' +
+        '<p>45 minutes</p>' +
+        '</div>' +
+        '</div>' +
+        '<div class=\"day tue\">'+
+        '<h2>Aug 1</h2>' +
+        '<div>' +
+        '<h3>#3</h3>' +
+        '<h3>RUN:</h3>' +
+        '<p>15 minutes</p>' +
+        '</div>' +
+        '</div>' +
+        '<div class=\"day wed\">'+
+        '<h2>2</h2>' +
+        '</div>' +
+        '<div class=\"day thu\">'+
+        '<h2>3</h2>' +
+        '</div>' +
+        '<div class=\"day fri\">'+
+        '<h2>4</h2>' +
+        '</div>' +
+        '<div class=\"day sat\">'+
+        '<h2>5</h2>' +
+        '</div>' +
+        '<div class=\"day sun\">'+
+        '<h2>6</h2>' +
+        '<div>' +
+        '<h3>#4</h3>' +
+        '<h3>SWIM:</h3>' +
+        '<p>700yds 6 x 50yds, 4 x 100yds</p>' +
+        '</div>' +
+        '</div>' +
+        '<div class=\"day mon\">'+
+        '<h2>7</h2>' +
+        '<div>' +
+        '<h3>#5</h3>' +
+        '<h3>BIKE:</h3>' +
+        '<p>45 minutes</p>' +
+        '</div>' +
+        '</div>' +
+        '<div class=\"day tue\">'+
+        '<h2>8</h2>' +
+        '<div>' +
+        '<h3>#6</h3>' +
+        '<h3>RUN:</h3>' +
+        '<p>20 minutes</p>' +
+        '</div>' +
+        '</div>' +
+        '<div class=\"day wed\">'+
+        '<h2>9</h2>' +
+        '</div>' +
+        '<div class=\"day thu\">'+
+        '<h2>10</h2>' +
+        '</div>' +
+        '<div class=\"day fri\">'+
+        '<h2>11</h2>' +
+        '</div>' +
+        '<div class=\"day sat\">'+
+        '<h2>12</h2>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+
+    expect(createCalendar(startDate, testArray3)).toEqual(expectedHTML);
+})

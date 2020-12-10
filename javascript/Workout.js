@@ -6,6 +6,8 @@ let Workout = class {
         this.title = title;
         this.description = description;
         this.workoutDate = workoutDate;
+
+
     }
 
     addDate(inputDate) {
@@ -15,6 +17,10 @@ let Workout = class {
     toString() {
         return `Workout Num: ${this.workoutNum}, Week Num: ${this.weekNum}, 
         title: ${this.title}, description: ${this.description}, Workout Date: ${this.workoutDate},`
+    }
+
+    copyWorkout = () =>  {
+        return new Workout(this.workoutNum, this.weekNum, this.title, this.description, this.workoutDate);
     }
 }
 

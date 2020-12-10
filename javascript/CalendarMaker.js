@@ -1,5 +1,6 @@
 const Workout = require('../javascript/Workout');
 const getDateDaysFrom = require('../javascript/MyDate');
+const {getCalArray} = require("./Calendar");
 
 const textToWorkoutSchedule = (workoutPlanText) => {
     let workoutSchedule;
@@ -87,20 +88,22 @@ const createCalWeek = (firstDate, arrayOfWorkouts) => {
     if (firstDate.getDay() !== 0) {
         throw 'firstDate of week must be a Sunday'
     }
-        //create an empty div set with div for each day of the week
-    for (let day in daysOfWeek) {
-        const dayDiv = document.createElement("div");
-        dayDiv.setAttribute("class", 'day');
-        calWeek.appendChild(dayDiv);
-    }
+    //     //create an empty div set with div for each day of the week
+    // for (let day in daysOfWeek) {
+    //     const dayDiv = document.createElement("div");
+    //     dayDiv.setAttribute("class", 'day');
+    //     calWeek.appendChild(dayDiv);
+    // }
 
-    //add Date labels to divs
-    const days = calWeek.getElementsByClassName('day');
+    // //add Date labels to divs
+    // const days = calWeek.getElementsByClassName('day');
 
     let i;
-    for (i=0; i < days.length; i++) {
-        const dateOfDay = getDateDaysFrom(i, firstDate);
-        const dateNum = dateOfDay.getDate();
+    for (i=0; i < daysOfWeek.length; i++) {
+        const dayDiv = document.createElement("div");
+        dayDiv.setAttribute("class", 'day ' + daysOfWeek[i]);
+
+        const dateNum = getDateDaysFrom(i, firstDate).getDate();
         const monthsList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
             'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -110,27 +113,37 @@ const createCalWeek = (firstDate, arrayOfWorkouts) => {
         } else {
             dateLabel.innerHTML = dateNum.toString();
         }
-        days[i].appendChild(dateLabel);
+        dayDiv.appendChild(dateLabel);
+
+        let j;
+        //add workout info to Div Set
+        for (j=0; j < arrayOfWorkouts.length; j++) {
+
+            if (arrayOfWorkouts[j].workoutDate.getDate() === dateNum) {
+                const newDay = createCalDay(arrayOfWorkouts[i].workoutNum,
+                    arrayOfWorkouts[i].title, arrayOfWorkouts[i].description);
+                dayDiv.appendChild(newDay);
+            }
+        }
+        calWeek.appendChild(dayDiv);
     }
 
-    //add workout info to Div Set
-    for (i=0; i < arrayOfWorkouts.length; i++) {
 
-        const dayInt = arrayOfWorkouts[i].workoutDate.getDay();
-        const dayDiv = calWeek.getElementsByClassName('day')[dayInt];
-        const newDay = createCalDay(arrayOfWorkouts[i].workoutNum,
-            arrayOfWorkouts[i].title, arrayOfWorkouts[i].description);
-        dayDiv.appendChild(newDay);
-    }
 
     return calWeek;
 }
 
-const createCalendar = (workoutArray) => {
-    let workoutArraysByWeek = [];
+const createCalendar = (firstDateStr, workoutArray) => {
+    let calendarArray = [];
+    if (typeof workoutArray[0] === 'Workout') {
+        console.log('its a workout');
+    }
+    calendarArray = getCalArray(firstDateStr, workoutArray);
     let weekOfWorkouts = [];
     let lastWeekNum = 0;
-    for (let workout in workoutArray) {
+
+
+    for (let workout in calendarArray) {
         if (workout.weekNum !== lastWeekNum) {
             if (lastWeekNum !== 0) {
                 workoutArraysByWeek.push(weekOfWorkouts);
