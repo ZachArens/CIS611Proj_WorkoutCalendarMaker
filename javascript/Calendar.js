@@ -21,7 +21,7 @@ const getStartDate = (numDaysOfWorkoutSchedule, raceDate) => {
     return startDate;
 };
 
-const getCalArray = (startDateStr, workoutSchArr) => {
+const getCalArray = (startDate, workoutSchArr) => {
     let i;
     let daysAvailable;
     let currentWeek;
@@ -29,7 +29,7 @@ const getCalArray = (startDateStr, workoutSchArr) => {
     let calendarArray = [];
     let calWeekArray = [];
 
-    let startDate = getStartDate(0, startDateStr);
+    //let startDate = getStartDate(0, startDateStr);
 
     for (i=0; i<workoutSchArr.length; i++) {
 
@@ -68,8 +68,8 @@ const getCalArray = (startDateStr, workoutSchArr) => {
             daysAvailable[6] = false;
         }
 
-        let newWorkout = workoutSchArr[i].copyWorkout();
-        newWorkout.addDate(newDate);
+        let newWorkout = Object.assign(Object.create(Object.getPrototypeOf(workoutSchArr[i])), workoutSchArr[i]);
+        newWorkout.workoutDate = newDate;
 
         calWeekArray.push(newWorkout);
         lastWeekNum = currentWeek;

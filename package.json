@@ -10,6 +10,7 @@
     "start:dev": "webpack serve"
   },
   "dependencies": {
+    "dompurify": "^2.2.3",
     "purecss": "^2.0.3",
     "webpack-dev-server": "^3.11.0"
   }

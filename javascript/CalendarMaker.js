@@ -1,6 +1,6 @@
 const Workout = require('../javascript/Workout');
 const getDateDaysFrom = require('../javascript/MyDate');
-const {getCalArray} = require("./Calendar");
+const {getStartDate, getCalArray} = require("./Calendar");
 
 const textToWorkoutSchedule = (workoutPlanText) => {
     let workoutSchedule;
@@ -133,38 +133,41 @@ const createCalWeek = (firstDate, arrayOfWorkouts) => {
     return calWeek;
 }
 
-const createCalendar = (firstDateStr, workoutArray) => {
-    let calendarArray = [];
-    if (typeof workoutArray[0] === 'Workout') {
-        console.log('its a workout');
-    }
-    calendarArray = getCalArray(firstDateStr, workoutArray);
-    let weekOfWorkouts = [];
-    let lastWeekNum = 0;
-
-
-    for (let workout in calendarArray) {
-        if (workout.weekNum !== lastWeekNum) {
-            if (lastWeekNum !== 0) {
-                workoutArraysByWeek.push(weekOfWorkouts);
-            }
-            weekOfWorkouts = [];
-            lastWeekNum = workout.weekNum;
-        }
-        weekOfWorkouts.push(workout);
-    }
+const createCalendar = (dateStr, dateIsStart, workoutArray) => {
 
     let calendarDiv = document.createElement('div');
-    for (let workoutWeek in workoutArraysByWeek) {
+    calendarDiv.setAttribute('id', 'calendar');
+    let getMaxWeeks = (inputArray) => {
+        let maxWeeksNum = 0;
+        let i, j;
+        for (i=0; i<inputArray.length; i++) {
+            for (j=0; j<inputArray[i].length; j++) {
+                if (maxWeeksNum < inputArray[i][j].weekNum) {maxWeeksNum = inputArray[i][j].weekNum}
+            }
+        }
+        return maxWeeksNum;
+    }
 
+    let startDate;
+
+    if (dateIsStart) {
+        let weeksNum = getMaxWeeks(workoutArray);
+        startDate = getStartDate(weeksNum * 7, dateStr);
+    } else {
+        startDate = getStartDate(0, dateStr);
+    }
+
+    let weeksOfWorkouts = getCalArray(startDate, workoutArray);
+
+
+
+    let newWeek;
+    console.log(weeksOfWorkouts.length, "inner Array: ", weeksOfWorkouts[0].length);
+    for (let k=0; k<weeksOfWorkouts.length; k++) {
         //get date of sunday of that week
-        let firstEntryDate = workoutWeek[0].workoutDate;
-        let firstDateOfWeek = firstEntryDate;
-        let dateDiff = firstEntryDate.getDay();
-        firstDateOfWeek.setDate(firstEntryDate.getDate() - dateDiff);
-
-        let newWeek = createCalWeek(firstDateOfWeek, workoutWeek);
+        newWeek = createCalWeek(startDate, weeksOfWorkouts[k]);
         calendarDiv.appendChild(newWeek);
+        // console.log('appending week ', k);
     }
     return calendarDiv;
 }

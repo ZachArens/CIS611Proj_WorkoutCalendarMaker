@@ -3,7 +3,7 @@
 
 const Workout = require('./Workout.js');
 const {printWorkoutSchedule, createCalendar, textToWorkoutSchedule} = require("./CalendarMaker");
-
+const DOMPurify = require('dompurify');
 
 const pasteBox = document.getElementById("pasteText");
 const viewWindow = document.getElementById('data-window');
@@ -11,9 +11,9 @@ let workoutArray = [];
 let textFromFile = "";
 
 const processText = (text) => {
-    // TODO text.sanitize();
+    let cleanText = DOMPurify.sanitize(text);
     //alert('processing text: ' + text);
-    workoutArray = textToWorkoutSchedule(text);
+    workoutArray = textToWorkoutSchedule(cleanText);
     return printWorkoutSchedule(workoutArray);
 }
 
@@ -23,8 +23,8 @@ const checkData = (e) => {
     if (pasteBox.value && buttonClicked.id ==='checkPasteText') {
         //alert('check paste Text clicked');
         pastedData = pasteBox.value;
-
         pasteBox.value = processText(pastedData);
+
     } else if (buttonClicked.id === 'checkUploadText') {
         let file = document.getElementById('uploadText').files[0];
 
@@ -49,10 +49,12 @@ const submitCalOptions = (event) => {
     //event.preventDefault();
 
     //run check
-    processText(pasteBox.value);
     hideReplaceCalculate();
 
-    viewWindow.appendChild(createCalendar(workoutArray));
+   // let calendarDiv = createCalendar('08-30-2020', true, workoutArray);
+
+   // alert(calendarDiv);
+  //  document.getElementById('calendarPlaceholder').appendChild(calendarDiv);
 
     alert('submit button pushed2');
 }
@@ -63,7 +65,8 @@ const hideReplaceCalculate = (event) => {
     calOptions.hidden = false;
     submitButton.hidden = true;
     const outputBox = document.createElement('div');
-    outputBox.innerHTML = '<p>Here is where the calendar will be</p>';
+    outputBox.setAttribute('id', 'calendarPlaceholder');
+    outputBox.innerHTML = '<p>...Calculating</p>';
     document.getElementsByTagName('body')[0].insertBefore(outputBox, calOptions);
     const form = document.getElementById('CalendarMakerForm')
     form.hidden = true;
@@ -84,6 +87,5 @@ checkUploadTextButton.addEventListener("click", (event) => checkData(event)); //
 
 const submitButton = document.getElementById('CMsubmit');
 submitButton.addEventListener("click", (event) => {
-    //submitCalOptions(event);
-    hideReplaceCalculate()
+    submitCalOptions(event);
 });
