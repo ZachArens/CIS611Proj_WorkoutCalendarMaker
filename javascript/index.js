@@ -51,10 +51,9 @@ const submitCalOptions = (event) => {
     //run check
     hideReplaceCalculate();
 
-   // let calendarDiv = createCalendar('08-30-2020', true, workoutArray);
+    let calendarDiv = createCalendar('08-30-2020', true, workoutArray);
 
-   // alert(calendarDiv);
-  //  document.getElementById('calendarPlaceholder').appendChild(calendarDiv);
+    document.getElementById('calendarPlaceholder').appendChild(calendarDiv);
 
     alert('submit button pushed2');
 }

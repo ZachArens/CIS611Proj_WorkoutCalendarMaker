@@ -26,13 +26,13 @@ test('a Workout can be constructed with a workoutNumber only', () => {
 
 test('a date can be added to a workout', () => {
     const testWorkout = new Workout(2, 1, 'upper body', '100 pushups');
-    testWorkout.addDate(new Date());
-    expect(testWorkout.workoutDate).toEqual(new Date());
+    testWorkout.workoutDate = new Date(2020,11,25);
+    expect(testWorkout.workoutDate).toEqual(new Date(2020,11, 25));
 });
 
 test('a Workout can be constructed with a workoutNumber, weekNum, title, and description', () => {
     const testWorkout = new Workout(2, 1, 'upper body', '100 pushups');
-    const testWorkout2 = testWorkout.copyWorkout();
+    const testWorkout2 = Object.assign(Object.create(Object.getPrototypeOf(testWorkout)), testWorkout);
     expect(testWorkout2).not.toBe(testWorkout);
     expect(testWorkout2).toEqual(testWorkout);
 });

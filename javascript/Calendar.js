@@ -76,6 +76,18 @@ const getCalArray = (startDate, workoutSchArr) => {
     }
     calendarArray.push(calWeekArray);
 
+    let printWorkoutArray = (doubleArrayOfWorkouts) => {
+        let i, j;
+        for (i=0; i<doubleArrayOfWorkouts.length; i++) {
+            console.log('week ', i);
+            for (j=0; j<doubleArrayOfWorkouts[i].length; j++) {
+                console.log(doubleArrayOfWorkouts[i][j].weekNum, " wo#", doubleArrayOfWorkouts[i][j].workoutNum, "woDate: ", doubleArrayOfWorkouts[i][j].workoutDate);
+            }
+        }
+    }
+
+    printWorkoutArray(calendarArray);
+
     return calendarArray;
 
 };

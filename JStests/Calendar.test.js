@@ -75,7 +75,7 @@ test('adds a date to an array of workouts - including jumping to next week', () 
         '700yds 6 x 50yds, 4 x 100yds'), new Workout(5, 2, 'BIKE:',
         '45 minutes'), new Workout(6, 2, 'RUN:',
         '20 minutes'), ];
-    let startDate = '09-01-2020';
+    let startDate = new Date(2020, 7,30);
     let exampleArray = [[new Workout(1, 1, 'SWIM:',
         '600yds 4 x 50yds, 4 x 100yds', new Date(2020, 7, 30)), new Workout(2, 1, 'BIKE:',
         '45 minutes', new Date(2020, 7, 31)), new Workout(3, 1, 'RUN:',

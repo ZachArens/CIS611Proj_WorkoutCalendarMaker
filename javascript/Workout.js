@@ -10,18 +10,11 @@ let Workout = class {
 
     }
 
-    addDate(inputDate) {
-        this.workoutDate = inputDate;
-    }
-
     toString() {
         return `Workout Num: ${this.workoutNum}, Week Num: ${this.weekNum},
         title: ${this.title}, description: ${this.description}, Workout Date: ${this.workoutDate},`
     }
-    //
-    // copyWorkout = () =>  {
-    //     return new Workout(this.workoutNum, this.weekNum, this.title, this.description, this.workoutDate);
-    // }
+
 }
 
 module.exports = Workout;
