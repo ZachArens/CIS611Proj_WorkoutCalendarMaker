@@ -2,6 +2,9 @@ const Workout = require('../javascript/Workout');
 const getDateDaysFrom = require('../javascript/MyDate');
 const {getStartDate, getCalArray} = require("./Calendar");
 
+const monthsList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
+    'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 const textToWorkoutSchedule = (workoutPlanText) => {
     let workoutSchedule;
     let splitText = workoutPlanText.split('\n');
@@ -51,10 +54,12 @@ let printWorkoutSchedule = (workoutSchedule) => {
     let outputString = "";
     let i;
     for (i=0; i<workoutSchedule.length; i++) {
-        const workout = workoutSchedule[i];
-        const workoutString = `Workout ${workout.workoutNum} - 
-        Week ${workout.weekNum} - ${workout.title} ${workout.description}`;
+        //const workout = workoutSchedule[i];
+        const workoutString = `Workout ${workoutSchedule[i].workoutNum} - 
+        Week ${workoutSchedule[i].weekNum} - ${workoutSchedule[i].title} ${workoutSchedule[i].description}`;
         outputString += workoutString + '\n';
+        const workoutDate = 'workoutDate: ' + workoutSchedule[i].workoutDate + '\n';
+        if (workoutSchedule[i].workoutDate) {outputString += workoutDate;}
     }
 
     return outputString;
@@ -82,38 +87,29 @@ const createCalDay = (workoutNum, title, description) => {
 
 const createCalWeek = (firstDate, arrayOfWorkouts) => {
 
-    const calWeek = document.createElement("div");
+    const calWeek = document.createElement("tr");
     calWeek.setAttribute("class", 'week');
     const daysOfWeek = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
     if (firstDate.getDay() !== 0) {
         throw 'firstDate of week must be a Sunday'
     }
-    //     //create an empty div set with div for each day of the week
-    // for (let day in daysOfWeek) {
-    //     const dayDiv = document.createElement("div");
-    //     dayDiv.setAttribute("class", 'day');
-    //     calWeek.appendChild(dayDiv);
-    // }
-
-    // //add Date labels to divs
-    // const days = calWeek.getElementsByClassName('day');
 
     let i;
     for (i=0; i < daysOfWeek.length; i++) {
         //create a day div and set class to day and the day of the week
-        const dayDiv = document.createElement("div");
+        const dayDiv = document.createElement("th");
         dayDiv.setAttribute("class", 'day ' + daysOfWeek[i]);
 
         const activeDayDate = getDateDaysFrom(i, firstDate)
         const dateNum = activeDayDate.getDate();
-        const monthsList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
-            'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
         const dateLabel = document.createElement("h2");
         dateLabel.setAttribute('class', 'date');
 
-        if (dateNum === 1) {
-            dateLabel.innerHTML = monthsList[firstDate.getMonth()] + " " + dateNum.toString();
+        if (dateNum === 1 && i > 0) {
+            const month = new Date(firstDate.getTime());
+            month.setMonth(month.getMonth() + 1);
+            dateLabel.innerHTML = monthsList[month.getMonth()] + " " + dateNum.toString();
         } else {
             dateLabel.innerHTML = dateNum.toString();
         }
@@ -137,8 +133,10 @@ const createCalWeek = (firstDate, arrayOfWorkouts) => {
 
 const createCalendar = (dateStr, dateIsStart, workoutArray) => {
 
-    let calendarDiv = document.createElement('div');
+    //console.log('test workoutArray at input', printWorkoutSchedule(workoutArray));
+    let calendarDiv = document.createElement('table');
     calendarDiv.setAttribute('id', 'calendar');
+    let tableHeader = document.createElement('thead');
     let getMaxWeeks = (inputArray) => {
         let maxWeeksNum = 0;
         let i, j;
@@ -160,15 +158,36 @@ const createCalendar = (dateStr, dateIsStart, workoutArray) => {
         startDate = getStartDate(weeksNum * 7, dateStr);
     }
 
+    // console.log('startDate', startDate);
+    // console.log(printWorkoutSchedule(workoutArray));
 
     const calArray = getCalArray(startDate, workoutArray);
-    console.log(typeof calArray)
+    // console.log('in CalendarMaker');
+    //
+    // let printWorkoutArray = (doubleArrayOfWorkouts) => {
+    //     let i, j;
+    //     for (i=0; i<doubleArrayOfWorkouts.length; i++) {
+    //         console.log('week ', i);
+    //         for (j=0; j<doubleArrayOfWorkouts[i].length; j++) {
+    //             console.log(doubleArrayOfWorkouts[i][j].weekNum, " wo#", doubleArrayOfWorkouts[i][j].workoutNum, "woDate: ", doubleArrayOfWorkouts[i][j].workoutDate);
+    //         }
+    //     }
+    // }
+
+    // printWorkoutArray(calArray);
+
     let newWeek;
     for (let k=0; k<calArray.length; k++) {
         //get date of sunday of that week
         // console.log('k: ', k, 'startDate: ', startDate);
         newWeek = createCalWeek(getDateDaysFrom(k*7, startDate), calArray[k]);
-        // console.log(newWeek.innerHTML);
+
+        if (k === 0) {
+            const monthlessDate = newWeek.getElementsByClassName('date')[0].innerHTML;
+            const month = monthsList[startDate.getMonth()];
+            newWeek.getElementsByClassName('date')[0].innerHTML = month + ' ' + monthlessDate;
+        }
+
         calendarDiv.appendChild(newWeek);
         // console.log('appending week ', k);
     }

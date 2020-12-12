@@ -34,12 +34,12 @@ beforeAll(() => {
 })
 
 test('gets a startDate from a raceDate', () => {
-    expect(getStartDate(42, '09-13-2018'))
+    expect(getStartDate(42, '2018-09-13'))
         .toEqual(new Date(2018,6,29));
 });
 
 test('returns an array of dates for the workout plan', () => {
-    expect(getStartDate(21, '09-18-2020'))
+    expect(getStartDate(21, '2020-09-18'))
         .toEqual(new Date(2020,7,23));
 });
 

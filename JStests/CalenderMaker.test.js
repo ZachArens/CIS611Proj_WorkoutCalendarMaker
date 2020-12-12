@@ -6,8 +6,8 @@ const Calendar = require('../javascript/Calendar');
 const getCalArray = Calendar.getCalArray;
 
 
-let testArray1, testArray2;
-let returnedHTML;
+let testArray1, testArray2, testArray4;
+let returnedHTML, returnedHTML2;
 
 beforeAll(() => {
     testArray1 = [new Workout(1, 1, 'SWIM:',
@@ -34,42 +34,87 @@ beforeAll(() => {
         'Run easy for 1.5 miles (2.4 K)'), new Workout(14, 2, 'Day 7:',
         'Rest or 30-minute walk'),];
 
-    returnedHTML = '<div class=\"day sun\">'+
+    testArray4 = [[new Workout(1, 1, 'SWIM:',
+        '600yds 4 x 50yds, 4 x 100yds', new Date(2020,7, 30)), new Workout(2, 1, 'BIKE:',
+        '45 minutes', new Date(2020,7, 31)), new Workout(3, 1, 'RUN:',
+        '15 minutes', new Date(2020,8, 1)),], [new Workout(4, 2, 'SWIM:',
+        '700yds 6 x 50yds, 4 x 100yds',new Date(2020,8, 6)), new Workout(5, 2, 'BIKE:',
+        '45 minutes', new Date(2020,8, 7)), new Workout(6, 2, 'RUN:',
+        '20 minutes', new Date(2020,8, 8)),]];
+
+    returnedHTML = '<th class=\"day sun\">'+
         '<h2 class=\"date\">30</h2>' +
         '<div>' +
         '<h3>#1</h3>' +
         '<h3>SWIM:</h3>' +
         '<p>600yds 4 x 50yds, 4 x 100yds</p>' +
         '</div>' +
-        '</div>' +
-        '<div class=\"day mon\">'+
+        '</th>' +
+        '<th class=\"day mon\">'+
         '<h2 class=\"date\">31</h2>' +
         '<div>' +
         '<h3>#2</h3>' +
         '<h3>BIKE:</h3>' +
         '<p>45 minutes</p>' +
         '</div>' +
-        '</div>' +
-        '<div class=\"day tue\">'+
+        '</th>' +
+        '<th class=\"day tue\">'+
         '<h2 class=\"date\">Aug 1</h2>' +
         '<div>' +
         '<h3>#3</h3>' +
         '<h3>RUN:</h3>' +
         '<p>15 minutes</p>' +
         '</div>' +
-        '</div>' +
-        '<div class=\"day wed\">'+
+        '</th>' +
+        '<th class=\"day wed\">'+
         '<h2 class=\"date\">2</h2>' +
-        '</div>' +
-        '<div class=\"day thu\">'+
+        '</th>' +
+        '<th class=\"day thu\">'+
         '<h2 class=\"date\">3</h2>' +
-        '</div>' +
-        '<div class=\"day fri\">'+
+        '</th>' +
+        '<th class=\"day fri\">'+
         '<h2 class=\"date\">4</h2>' +
-        '</div>' +
-        '<div class=\"day sat\">'+
+        '</th>' +
+        '<th class=\"day sat\">'+
         '<h2 class=\"date\">5</h2>' +
-        '</div>';
+        '</th>';
+
+    returnedHTML2 = '<th class=\"day sun\">'+
+        '<h2 class=\"date\">Aug 30</h2>' +
+        '<div>' +
+        '<h3>#1</h3>' +
+        '<h3>SWIM:</h3>' +
+        '<p>600yds 4 x 50yds, 4 x 100yds</p>' +
+        '</div>' +
+        '</th>' +
+        '<th class=\"day mon\">'+
+        '<h2 class=\"date\">31</h2>' +
+        '<div>' +
+        '<h3>#2</h3>' +
+        '<h3>BIKE:</h3>' +
+        '<p>45 minutes</p>' +
+        '</div>' +
+        '</th>' +
+        '<th class=\"day tue\">'+
+        '<h2 class=\"date\">Aug 1</h2>' +
+        '<div>' +
+        '<h3>#3</h3>' +
+        '<h3>RUN:</h3>' +
+        '<p>15 minutes</p>' +
+        '</div>' +
+        '</th>' +
+        '<th class=\"day wed\">'+
+        '<h2 class=\"date\">2</h2>' +
+        '</th>' +
+        '<th class=\"day thu\">'+
+        '<h2 class=\"date\">3</h2>' +
+        '</th>' +
+        '<th class=\"day fri\">'+
+        '<h2 class=\"date\">4</h2>' +
+        '</th>' +
+        '<th class=\"day sat\">'+
+        '<h2 class=\"date\">5</h2>' +
+        '</th>';
 })
 
 test('creates an array of workouts from an index and a string formatted title: description', () => {
@@ -147,43 +192,6 @@ test('createCalWeek returns several divs with a date Number, workout number, tit
     let testArray3 = getCalArray(startDate, testArray1);
     let finalHTML = createCalWeek(startDate, testArray3[0]);
 
-    let returnedHTML = '<div class=\"day sun\">'+
-        '<h2 class=\"date\">30</h2>' +
-        '<div>' +
-        '<h3>#1</h3>' +
-        '<h3>SWIM:</h3>' +
-        '<p>600yds 4 x 50yds, 4 x 100yds</p>' +
-        '</div>' +
-        '</div>' +
-        '<div class=\"day mon\">'+
-        '<h2 class=\"date\">31</h2>' +
-        '<div>' +
-        '<h3>#2</h3>' +
-        '<h3>BIKE:</h3>' +
-        '<p>45 minutes</p>' +
-        '</div>' +
-        '</div>' +
-        '<div class=\"day tue\">'+
-        '<h2 class=\"date\">Aug 1</h2>' +
-        '<div>' +
-        '<h3>#3</h3>' +
-        '<h3>RUN:</h3>' +
-        '<p>15 minutes</p>' +
-        '</div>' +
-        '</div>' +
-        '<div class=\"day wed\">'+
-        '<h2 class=\"date\">2</h2>' +
-        '</div>' +
-        '<div class=\"day thu\">'+
-        '<h2 class=\"date\">3</h2>' +
-        '</div>' +
-        '<div class=\"day fri\">'+
-        '<h2 class=\"date\">4</h2>' +
-        '</div>' +
-        '<div class=\"day sat\">'+
-        '<h2 class=\"date\">5</h2>' +
-        '</div>';
-
     expect(finalHTML.getElementsByClassName('day').length).toEqual(7);
     expect(finalHTML.getElementsByClassName('date').length).toEqual(7);
     expect(finalHTML.innerHTML).toEqual(returnedHTML);
@@ -194,11 +202,9 @@ test('createCalWeek returns several divs with a date Number, workout number, tit
 
 
 test('createCalendar return should be a div with id="calendar"' , () => {
-    let testStartDate = new Date(2020, 7, 30);
-    let testArray3 = getCalArray(testStartDate, testArray1);
-    let startDateStr = '08-30-2020'
+    let startDateStr = '2020-08-30';
 
-    let finalHTML = createCalendar(startDateStr, true, testArray3);
+    let finalHTML = createCalendar(startDateStr, true, testArray1);
     let calendarDivExample = document.createElement('div');
     calendarDivExample.setAttribute('id', 'calendar');
 
@@ -206,41 +212,60 @@ test('createCalendar return should be a div with id="calendar"' , () => {
 });
 
 test('createCalendars return should have 2 child divs with class="week"' , () => {
-    let testStartDate = new Date(2020, 7, 30);
-    let testArray3 = getCalArray(testStartDate, testArray1);
-    let startDateStr = '08-30-2020'
+    let startDateStr = '2020-08-30';
 
-    let finalHTML = createCalendar(startDateStr, true, testArray3);
+    let finalHTML = createCalendar(startDateStr, true, testArray1);
     //console.log(finalHTML.innerHTML);
     expect(finalHTML.getElementsByClassName('week').length).toEqual(2);
 });
 
 
 test('createCalendars return 1st element with class week should have innerHTML that matches returnedHTML' , () => {
-    let testStartDate = new Date(2020, 7, 30);
-    let testArray3 = getCalArray(testStartDate, testArray1);
-    let startDateStr = '08-30-2020'
+    let startDateStr = '2020-08-30';
 
-    let finalHTML = createCalendar(startDateStr, true, testArray3);
+    let finalHTML = createCalendar(startDateStr, true, testArray1);
     //console.log(finalHTML.innerHTML);
-    expect(finalHTML.getElementsByClassName('week')[0].innerHTML).toEqual(returnedHTML);
+    expect(finalHTML.getElementsByClassName('week')[0].innerHTML).toEqual(returnedHTML2);
 });
 
 test('createCalendar returns 14 day elements' , () => {
-    let testStartDate = new Date(2020, 7, 30);
-    let testArray3 = getCalArray(testStartDate, testArray1);
-    let startDateStr = '08-30-2020'
+    let startDateStr = '2020-08-30'
 
-    let finalHTML = createCalendar(startDateStr, true, testArray3);
+    let finalHTML = createCalendar(startDateStr, true, testArray1);
     //console.log(finalHTML.innerHTML);
     expect(finalHTML.getElementsByClassName('day').length).toEqual(14);
 });
 
-test('createCalendars return 1st element with class week should have innerHTML that matches returnedHTML' , () => {
-    let testStartDate = new Date(2020, 7, 30);
-    let testArray3 = getCalArray(testStartDate, testArray1);
-    let startDateStr = '08-30-2020'
+test('createCalendar return should be a div with id="calendar" when race date' , () => {
+    let startDateStr = '2020-08-30';
 
-    let finalHTML = createCalendar(startDateStr, true, testArray3);
-    console.log(finalHTML.innerHTML);
+    let finalHTML = createCalendar(startDateStr, false, testArray1);
+    let calendarDivExample = document.createElement('div');
+    calendarDivExample.setAttribute('id', 'calendar');
+
+    expect(finalHTML.getAttribute('id')).toEqual('calendar');
+});
+
+test('createCalendars return should have 2 child divs with class="week" when race date' , () => {
+    let startDateStr = '2020-08-30';
+
+    let finalHTML = createCalendar(startDateStr, false, testArray1);
+    //console.log(finalHTML.innerHTML);
+    expect(finalHTML.getElementsByClassName('week').length).toEqual(2);
+});
+
+test('createCalendar returns 14 day elements when race date' , () => {
+    let startDateStr = '2020-08-30'
+
+    let finalHTML = createCalendar(startDateStr, false, testArray1);
+    //console.log(finalHTML.innerHTML);
+    expect(finalHTML.getElementsByClassName('day').length).toEqual(14);
+});
+
+test('createCalendars return should have 2 child divs with class="week" when race date' , () => {
+    let startDateStr = '2020-08-30';
+
+    let finalHTML = createCalendar(startDateStr, false, testArray1);
+    //console.log(finalHTML.innerHTML);
+    expect(finalHTML.getElementsByClassName('week').length).toEqual(2);
 });

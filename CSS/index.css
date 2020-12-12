@@ -50,3 +50,36 @@ fieldset {
 ::-moz-placeholder {
     font-family: 'Montserrat', sans-serif;
 }
+
+#calendar {
+    background-color: white;
+    /*margin: 20px;*/
+    /*border-top: solid darkslategrey 1px;*/
+    /*border-bottom: solid darkslategrey 1px;*/
+
+}
+table {
+    display: table;
+    border: solid 1px darkslategrey;
+    border-collapse: collapse;
+}
+
+th {
+    border: solid 1px darkslategrey;
+}
+
+tr {
+    align-content: space-evenly;
+    vertical-align: top;
+}
+
+.day {
+
+    display: inline-block;
+    width: calc((100% - 28px) / 7);
+
+}
+.day > div {
+    width: 100%;
+    font-size: 75%;
+}

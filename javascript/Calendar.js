@@ -5,9 +5,9 @@ const dateFromString = (inputDate) => {
 
     const dateArr = inputDate.split('-');
 
-    const m = dateArr[0];
-    const d = dateArr[1];
-    const y = dateArr[2];
+    const y = dateArr[0];
+    const m = dateArr[1];
+    const d = dateArr[2];
 
     return new Date(y, m-1, d, 0, 0, 0, 0);
 };
@@ -76,17 +76,18 @@ const getCalArray = (startDate, workoutSchArr) => {
     }
     calendarArray.push(calWeekArray);
 
-    let printWorkoutArray = (doubleArrayOfWorkouts) => {
-        let i, j;
-        for (i=0; i<doubleArrayOfWorkouts.length; i++) {
-            console.log('week ', i);
-            for (j=0; j<doubleArrayOfWorkouts[i].length; j++) {
-                console.log(doubleArrayOfWorkouts[i][j].weekNum, " wo#", doubleArrayOfWorkouts[i][j].workoutNum, "woDate: ", doubleArrayOfWorkouts[i][j].workoutDate);
-            }
-        }
-    }
+    // console.log('in Calendar');
+    // let printWorkoutArray = (doubleArrayOfWorkouts) => {
+    //     let i, j;
+    //     for (i=0; i<doubleArrayOfWorkouts.length; i++) {
+    //         console.log('week ', i);
+    //         for (j=0; j<doubleArrayOfWorkouts[i].length; j++) {
+    //             console.log(doubleArrayOfWorkouts[i][j].weekNum, " wo#", doubleArrayOfWorkouts[i][j].workoutNum, "woDate: ", doubleArrayOfWorkouts[i][j].workoutDate);
+    //         }
+    //     }
+    // }
 
-    printWorkoutArray(calendarArray);
+    // printWorkoutArray(calendarArray);
 
     return calendarArray;
 

@@ -6,8 +6,6 @@ let Workout = class {
         this.title = title;
         this.description = description;
         this.workoutDate = workoutDate;
-
-
     }
 
     toString() {
