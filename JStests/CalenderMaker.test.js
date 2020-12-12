@@ -59,7 +59,7 @@ beforeAll(() => {
         '</div>' +
         '</th>' +
         '<th class=\"day tue\">'+
-        '<h2 class=\"date\">Aug 1</h2>' +
+        '<h2 class=\"date\">Sep 1</h2>' +
         '<div>' +
         '<h3>#3</h3>' +
         '<h3>RUN:</h3>' +
@@ -96,7 +96,7 @@ beforeAll(() => {
         '</div>' +
         '</th>' +
         '<th class=\"day tue\">'+
-        '<h2 class=\"date\">Aug 1</h2>' +
+        '<h2 class=\"date\">Sep 1</h2>' +
         '<div>' +
         '<h3>#3</h3>' +
         '<h3>RUN:</h3>' +

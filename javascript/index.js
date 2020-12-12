@@ -6,7 +6,7 @@ const {printWorkoutSchedule, createCalendar, textToWorkoutSchedule} = require(".
 const DOMPurify = require('dompurify');
 
 const pasteBox = document.getElementById("pasteText");
-const viewWindow = document.getElementById('data-window');
+
 let workoutArray = [];
 let textFromFile = "";
 let pasteNotUpload = true;
@@ -14,21 +14,22 @@ let checkedDataPresent = false;
 
 const processText = (text) => {
     let cleanText = DOMPurify.sanitize(text);
-    //alert('processing text: ' + text);
+    //alert('processing text: ' + cleanText);
     workoutArray = textToWorkoutSchedule(cleanText);
+
     checkedDataPresent = true;
     return printWorkoutSchedule(workoutArray);
 }
 
 const checkData = (e) => {
-    //let buttonClicked = e.target;
+    let buttonClicked = e.target;
     let pastedData;
-    if (pasteBox.value && pasteNotUpload) {
+    if (pasteBox.value && buttonClicked.getAttribute('id') === 'checkPasteText') {
         //alert('check paste Text clicked');
         pastedData = pasteBox.value;
         pasteBox.value = processText(pastedData);
 
-    } else if (!pasteNotUpload) {
+    } else if (buttonClicked.getAttribute('id') === 'checkUploadText') {
         let file = document.getElementById('uploadText').files[0];
 
         if (file.type === "text/plain" ) {
@@ -50,15 +51,18 @@ const checkData = (e) => {
 const submitCalOptions = (event) => {
     //TODO need to collect data and pass to functions
     //event.preventDefault();
-    checkData(event);
-    //run check
+    //TODO - run final check
     hideReplaceCalculate();
 
     const dateIsStart = () => {
         if (document.getElementById('start').value === 'start') {
+            //alert('start');
             return true;
+
         } else if (document.getElementById('race').value === 'race') {
+            //alert('race');
             return false;
+
         } else {
             throw 'Race or Start Date selection is missing'
         }
@@ -71,11 +75,12 @@ const submitCalOptions = (event) => {
             throw 'Date for start or race is missing';
         }
     }
-
     let calendarDiv;
 
     try {
+
         calendarDiv = createCalendar(inputDate(), dateIsStart(), workoutArray);
+        //alert(calendarDiv.innerHTML);
     } catch (e) {
         //TODO - this may be security risk - create if/then if time
         alert (e);
@@ -124,8 +129,8 @@ const hideReplaceReset = (event) => {
 const checkPasteTextButton = document.getElementById("checkPasteText");
 checkPasteTextButton.addEventListener("click", (event) => checkData(event)); //checkData(event));
 
-// const checkUploadTextButton = document.getElementById("checkUploadText");
-// checkUploadTextButton.addEventListener("click", (event) => checkData(event)); //checkData(event));
+const checkUploadTextButton = document.getElementById("checkUploadText");
+checkUploadTextButton.addEventListener("click", (event) => checkData(event)); //checkData(event));
 
 const submitButton = document.getElementById('CMsubmit');
 submitButton.addEventListener("click", (event) => {
@@ -137,16 +142,16 @@ resetButton.addEventListener("click", (event) => {
     hideReplaceReset(event);
 });
 
-pasteBox.addEventListener("change", (event) => {
-    pasteNotUpload = true;
-    alert('paste changed');
-    checkedDataPresent = false;
-});
-
-const fileURLBox = document.getElementById('uploadText');
-fileURLBox.addEventListener("change", (event) => {
-    pasteNotUpload = false;
-    checkedDataPresent = false;
-    alert('paste changed');
-    checkData(event);
-})
+// pasteBox.addEventListener("change", (event) => {
+//     pasteNotUpload = true;
+//     //alert('paste changed');
+//     checkedDataPresent = false;
+// });
+//
+// const fileURLBox = document.getElementById('uploadText');
+// fileURLBox.addEventListener("change", (event) => {
+//     pasteNotUpload = false;
+//     checkedDataPresent = false;
+//     //alert('file changed');
+//     checkData(event);
+// })

@@ -14,7 +14,6 @@ const textToWorkoutSchedule = (workoutPlanText) => {
     };
 
     let filteredText = splitText.filter(removeBlanks);
-
     let weekNum = 0;
     let workoutNum = 0;
     let createWorkout = (item) => {
@@ -30,6 +29,7 @@ const textToWorkoutSchedule = (workoutPlanText) => {
             description = '';
         }
 
+
         if (item.match(/week/i)) {
             weekNum ++;
             return "";
@@ -38,6 +38,7 @@ const textToWorkoutSchedule = (workoutPlanText) => {
         } else {
             workoutNum ++;
             workout = new Workout(workoutNum, weekNum, title, description);
+
         }
         return workout;
     };
@@ -61,7 +62,7 @@ let printWorkoutSchedule = (workoutSchedule) => {
         const workoutDate = 'workoutDate: ' + workoutSchedule[i].workoutDate + '\n';
         if (workoutSchedule[i].workoutDate) {outputString += workoutDate;}
     }
-
+    //alert(outputString);
     return outputString;
 };
 
@@ -162,19 +163,22 @@ const createCalendar = (dateStr, dateIsStart, workoutArray) => {
     // console.log(printWorkoutSchedule(workoutArray));
 
     const calArray = getCalArray(startDate, workoutArray);
-    // console.log('in CalendarMaker');
-    //
-    // let printWorkoutArray = (doubleArrayOfWorkouts) => {
-    //     let i, j;
-    //     for (i=0; i<doubleArrayOfWorkouts.length; i++) {
-    //         console.log('week ', i);
-    //         for (j=0; j<doubleArrayOfWorkouts[i].length; j++) {
-    //             console.log(doubleArrayOfWorkouts[i][j].weekNum, " wo#", doubleArrayOfWorkouts[i][j].workoutNum, "woDate: ", doubleArrayOfWorkouts[i][j].workoutDate);
-    //         }
-    //     }
-    // }
+    //alert('in CalendarMaker');
 
-    // printWorkoutArray(calArray);
+    let string;
+
+    let printWorkoutArray = (doubleArrayOfWorkouts) => {
+        let i, j;
+        for (i=0; i<doubleArrayOfWorkouts.length; i++) {
+            string += 'week ' + i;
+            for (j=0; j<doubleArrayOfWorkouts[i].length; j++) {
+                string += doubleArrayOfWorkouts[i][j].weekNum + " wo#" + doubleArrayOfWorkouts[i][j].workoutNum + "woDate: " + doubleArrayOfWorkouts[i][j].workoutDate;
+            }
+        }
+        return string;
+    }
+
+    //alert(printWorkoutArray(calArray));
 
     let newWeek;
     for (let k=0; k<calArray.length; k++) {
@@ -189,7 +193,7 @@ const createCalendar = (dateStr, dateIsStart, workoutArray) => {
         }
 
         calendarDiv.appendChild(newWeek);
-        // console.log('appending week ', k);
+        //alert ('appending week ', k);
     }
     return calendarDiv;
 
